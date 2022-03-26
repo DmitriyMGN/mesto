@@ -1,4 +1,5 @@
 .profile__avatar {
   margin-right: 30px;
   display: block;
+  object-fit: contain;
 }

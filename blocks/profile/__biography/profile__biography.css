@@ -1,8 +1,6 @@
 .profile__biography {
   max-width: 366px;
-  min-height: 73px;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-
 }

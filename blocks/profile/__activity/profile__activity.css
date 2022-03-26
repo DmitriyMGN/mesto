@@ -1,6 +1,7 @@
 .profile__activity {
   margin: 0;
   padding: 0;
+  padding-bottom: 14px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;

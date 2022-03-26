@@ -1,0 +1,11 @@
+.elements__item {
+  max-width: 282px;
+  min-height: 361px;
+  margin: 0;
+  background-color: white;
+  display: flex;
+  align-content: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
