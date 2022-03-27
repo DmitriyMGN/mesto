@@ -1,19 +1,16 @@
-.profile__activity {
+.footer__copyright {
   margin: 0;
   padding: 0;
-  padding-bottom: 14px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
-  color: white;
+  color: #545454;
 }
 
-@media screen and (max-width:768px) {
-  .profile__activity {
-    padding: 0;
-    padding-top: 10px;
+@media screen and (max-width:320px) {
+  .footer__copyright {
     font-size: 14px;
     line-height: 1.21;
   }

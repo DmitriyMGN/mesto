@@ -9,3 +9,11 @@
   background-repeat: no-repeat;
   border: 1px solid white;
 }
+
+@media screen and (max-width:768px) {
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+}

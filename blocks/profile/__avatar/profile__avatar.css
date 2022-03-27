@@ -3,3 +3,9 @@
   display: block;
   object-fit: contain;
 }
+
+@media screen and (max-width:768px) {
+  .profile__avatar {
+    margin-right: 0;
+  }
+}

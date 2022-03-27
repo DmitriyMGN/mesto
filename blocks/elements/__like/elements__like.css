@@ -1,6 +1,12 @@
 .elements__like {
   width: 22px;
   height: 19px;
-  padding-top: 31px;
-  padding-right: 20px;
+  padding: 0;
+  margin-right: 5px;
+  align-self: center;
+  background-image: url(../../../images/elements__like.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  border: none;
 }

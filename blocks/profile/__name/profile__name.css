@@ -11,3 +11,12 @@
   word-wrap: break-word;
   color: #FFFFFF;
 }
+
+@media screen and (max-width:768px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 1.22;
+    padding-top: 26px;
+    padding-left: 25px;
+  }
+}
