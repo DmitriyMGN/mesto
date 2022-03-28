@@ -1,0 +1,12 @@
+.popup__cross {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background-image: url(../../../images/popup__cross.svg);
+  background-repeat: no-repeat;
+  background-color: black;
+  position: absolute;
+  top: -38px;
+  right: -38px;
+}
