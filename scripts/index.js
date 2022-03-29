@@ -25,5 +25,3 @@ function formSubmitHandler(evt) {
 }
 
 PopupSubmit.addEventListener('click', formSubmitHandler);
-
-
