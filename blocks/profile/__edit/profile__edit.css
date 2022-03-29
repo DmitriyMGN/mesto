@@ -9,6 +9,11 @@
   background-repeat: no-repeat;
   border: 1px solid white;
   cursor: pointer;
+  transition: opacity .5s ease-in;
+}
+
+.profile__edit:hover {
+  opacity: 60%;
 }
 
 @media screen and (max-width:768px) {

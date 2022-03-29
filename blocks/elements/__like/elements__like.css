@@ -9,4 +9,10 @@
   background-position: center;
   background-color: white;
   border: none;
+  cursor: pointer;
+  transition: opacity .5s ease-in;
+}
+
+.elements__like:hover {
+  opacity: 60%;
 }

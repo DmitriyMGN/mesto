@@ -5,8 +5,23 @@
   border: none;
   background-image: url(../../../images/popup__cross.svg);
   background-repeat: no-repeat;
-  background-color: black;
+  background-color: transparent;
   position: absolute;
   top: -38px;
   right: -38px;
+  cursor: pointer;
+  transition: opacity .5s ease-in;
+}
+
+.popup__cross:hover {
+  opacity: 60%;
+}
+
+@media screen and (max-width:570px) {
+  .popup__cross {
+    width: 20px;
+    height: 20px;
+    background-image: url(../../../images/popup__cross-mobile.svg);
+    right: 0;
+  }
 }
