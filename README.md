@@ -16,4 +16,4 @@
 * Реализация модального окна "popup" с применением JavaScript
 
 # Ссылка на GitHub Pages:
-
+* https://dmitriymgn.github.io/mesto/
