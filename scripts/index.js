@@ -1,27 +1,29 @@
-let EditButton = document.querySelector('.profile__edit');
-let Popup = document.querySelector('.popup');
-let PopupCross = document.querySelector('.popup__cross');
-let PopupSubmit = document.querySelector('.popup__submit');
-let ProfileName = document.querySelector('.profile__name');
-let ProfileActivity = document.querySelector('.profile__activity');
-let PopupName = document.querySelector('.popup__name');
-let PopupActivity = document.querySelector('.popup__activity');
+let editButton = document.querySelector('.profile__edit');
+let popup = document.querySelector('.popup');
+let popupForm = document.querySelector('.popup__form');
+let popupCross = document.querySelector('.popup__cross');
+let profileName = document.querySelector('.profile__name');
+let profileActivity = document.querySelector('.profile__activity');
+let popupName = document.querySelector('.popup__input_place_name');
+let popupActivity = document.querySelector('.popup__input_place_activity');
 
 function togglePopup ()  {
-  Popup.classList.toggle('popup__open');
-  PopupName.value = ProfileName.textContent;
-  PopupActivity.value = ProfileActivity.textContent;
+  popup.classList.toggle('popup_open');
+  if (popup.classList.contains('popup_open')) {
+    popupName.value = profileName.textContent;
+    popupActivity.value = profileActivity.textContent;
+  }
 }
 
-EditButton.addEventListener('click', togglePopup);
-PopupCross.addEventListener('click', togglePopup);
+editButton.addEventListener('click', togglePopup);
+popupCross.addEventListener('click', togglePopup);
 
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  ProfileName.textContent = PopupName.value;
-  ProfileActivity.textContent = PopupActivity.value;
+  profileName.textContent = popupName.value;
+  profileActivity.textContent = popupActivity.value;
   togglePopup();
 }
 
-PopupSubmit.addEventListener('click', formSubmitHandler);
+popupForm.addEventListener('submit', formSubmitHandler);
