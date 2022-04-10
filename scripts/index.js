@@ -1,29 +1,41 @@
-let editButton = document.querySelector('.profile__edit');
-let popup = document.querySelector('.popup');
-let popupForm = document.querySelector('.popup__form');
-let popupCross = document.querySelector('.popup__cross');
-let profileName = document.querySelector('.profile__name');
-let profileActivity = document.querySelector('.profile__activity');
-let popupName = document.querySelector('.popup__input_place_name');
-let popupActivity = document.querySelector('.popup__input_place_activity');
+const editButton = document.querySelector('.profile__edit');
+const popupPlaceProfile = document.querySelector('.popup_place_profile');
+const popupForm = document.querySelector('.popup__form');
+const popupCrossPlaceProfile = document.querySelector('.popup__cross');
+const profileName = document.querySelector('.profile__name');
+const profileActivity = document.querySelector('.profile__activity');
+const popupName = document.querySelector('.popup__input_place_name');
+const popupActivity = document.querySelector('.popup__input_place_activity');
 
-function togglePopup ()  {
-  popup.classList.toggle('popup_open');
-  if (popup.classList.contains('popup_open')) {
-    popupName.value = profileName.textContent;
-    popupActivity.value = profileActivity.textContent;
+const profileAddButton = document.querySelector('.profile__add-button');
+const popupPlaceCard = document.querySelector('.popup_place_card'); 
+const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross'); 
+
+
+function openPopup(modalWindow) {
+  modalWindow.classList.add('popup_open');
   }
+
+function closePopup(modalWindow) {
+  modalWindow.classList.remove('popup_open');
 }
-
-editButton.addEventListener('click', togglePopup);
-popupCross.addEventListener('click', togglePopup);
-
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = popupName.value;
   profileActivity.textContent = popupActivity.value;
-  togglePopup();
+  closePopup(popupPlaceProfile);
 }
+
+editButton.addEventListener('click', function() {
+  popupPlaceProfile.classList.add('popup_open');
+  if (popupPlaceProfile.classList.contains('popup_open')) {
+    popupName.value = profileName.textContent;
+    popupActivity.value = profileActivity.textContent;
+}});
+
+popupCrossPlaceProfile.addEventListener('click', () => closePopup(popupPlaceProfile));
+profileAddButton.addEventListener('click', () => openPopup(popupPlaceCard));
+popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
 
 popupForm.addEventListener('submit', formSubmitHandler);
