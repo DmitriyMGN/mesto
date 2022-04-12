@@ -42,7 +42,6 @@ const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupSubmitPlaceCard = popupPlaceCard.querySelector('.popup__submit');
 
 const elementsList = document.querySelector('.elements__list');
-const removeButton = elementsList.querySelector('.elements__remove');
 const template = document.querySelector('.template');
 
 function render() {
@@ -58,6 +57,9 @@ function getElement(item) {
   elementsImage.src = item.link;
   elementsImage.alt = item.name;
 
+  const removeButton = newItem.querySelector('.elements__remove');
+  removeButton.addEventListener('click', handleRemoveElements);
+ 
   return newItem;
 }
 
@@ -81,7 +83,6 @@ function handleRemoveElements(evt) {
   element.remove();
 }
 
-removeButton.addEventListener('click', handleRemoveElements);
 
 editButton.addEventListener('click', function() {
   if (!popupPlaceProfile.classList.contains('popup_open')) {
