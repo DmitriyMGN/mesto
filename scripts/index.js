@@ -47,7 +47,7 @@ const template = document.querySelector('.template');
 function render() {
   const html = initialCards.map(getElement);
   elementsList.prepend(...html);
-}
+} 
 
 function getElement(item) {
   const newItem = template.content.cloneNode(true);
@@ -58,8 +58,11 @@ function getElement(item) {
   elementsImage.alt = item.name;
 
   const removeButton = newItem.querySelector('.elements__remove');
+  const likeButton = newItem.querySelector('.elements__like');
+
   removeButton.addEventListener('click', handleRemoveElements);
- 
+  likeButton.addEventListener('click', handleLikeElements);
+
   return newItem;
 }
 
@@ -81,6 +84,12 @@ function formSubmitHandler(evt) {
 function handleRemoveElements(evt) {
   const element = evt.target.closest('.elements__item');
   element.remove();
+}
+
+function handleLikeElements(evt) {
+  const element = evt.target.closest('.elements__item');
+  const likeButtonActive = element.querySelector('.elements__like');
+  likeButtonActive.classList.toggle('elements__like_active');
 }
 
 
