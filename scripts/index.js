@@ -42,11 +42,12 @@ const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupSubmitPlaceCard = popupPlaceCard.querySelector('.popup__submit');
 
 const elementsList = document.querySelector('.elements__list');
+const removeButton = elementsList.querySelector('.elements__remove');
 const template = document.querySelector('.template');
 
 function render() {
   const html = initialCards.map(getElement);
-  elementsList.append(...html);
+  elementsList.prepend(...html);
 }
 
 function getElement(item) {
@@ -54,15 +55,11 @@ function getElement(item) {
   const elementsTitle = newItem.querySelector('.elements__title');
   const elementsImage = newItem.querySelector('.elements__image');
   elementsTitle.textContent = item.name; 
-  elementsImage.setAttribute('src',`${item.link}`);
-  elementsImage.setAttribute('alt',`${item.name}`);
+  elementsImage.src = item.link;
+  elementsImage.alt = item.name;
+
   return newItem;
 }
-
-render()
-
-
-
 
 function openPopup(modalWindow) {
   modalWindow.classList.add('popup_open');
@@ -79,6 +76,13 @@ function formSubmitHandler(evt) {
   closePopup(popupPlaceProfile);
 }
 
+function handleRemoveElements(evt) {
+  const element = evt.target.closest('.elements__item');
+  element.remove();
+}
+
+removeButton.addEventListener('click', handleRemoveElements);
+
 editButton.addEventListener('click', function() {
   if (!popupPlaceProfile.classList.contains('popup_open')) {
     popupName.value = profileName.textContent;
@@ -87,8 +91,23 @@ editButton.addEventListener('click', function() {
   openPopup(popupPlaceProfile);
 });
 popupCrossPlaceProfile.addEventListener('click', () => closePopup(popupPlaceProfile));
-
-profileAddButton.addEventListener('click', () => openPopup(popupPlaceCard));
-popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
-
 popupForm.addEventListener('submit', formSubmitHandler);
+
+profileAddButton.addEventListener('click', function() {
+  popupCardName.value ='';
+  popupCardLink.value ='';
+  openPopup(popupPlaceCard);
+});
+popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
+popupSubmitPlaceCard.addEventListener('click', function(evt) {
+  evt.preventDefault();
+  const element = getElement({name: popupCardName.value, link: popupCardLink.value });
+  elementsList.prepend(element);
+  closePopup(popupPlaceCard);
+  evt.preventDefault();
+});
+
+
+
+render();
+

@@ -1,6 +1,9 @@
 .elements__item {
+  width: 100%;
   max-width: 282px;
   margin: 0;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 10px;
   position: relative;
