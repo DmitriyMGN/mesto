@@ -34,6 +34,7 @@ const popupPlaceCard = document.querySelector('.popup_place_card');
 const popupPlaceCardImage = document.querySelector('.popup_place_card-image');
 const elementsImage = document.querySelector('.elements__image');
 const popupForm = document.querySelector('.popup__form');
+const popupFormPlaceCard = popupPlaceCard.querySelector('.popup__form');
 
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
@@ -44,13 +45,12 @@ const popupCardLink = document.querySelector('.popup__input_place_card-link');
 
 const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupCrossPlaceCardImage = popupPlaceCardImage.querySelector('.popup__cross');
-const popupSubmitPlaceCard = popupPlaceCard.querySelector('.popup__submit');
 const elementsList = document.querySelector('.elements__list');
 const template = document.querySelector('.template');
 
 function render() {
-  const html = initialCards.map(getElement);
-  elementsList.prepend(...html);
+  const cards = initialCards.map(getElement);
+  elementsList.prepend(...cards);
 } 
 
 function getElement(item) {
@@ -79,7 +79,7 @@ function closePopup(modalWindow) {
   modalWindow.classList.remove('popup_open');
 }
 
-function formSubmitHandler(evt) {
+function profileFormSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = popupName.value;
   profileActivity.textContent = popupActivity.value;
@@ -118,7 +118,7 @@ editButton.addEventListener('click', function() {
   openPopup(popupPlaceProfile);
 });
 popupCrossPlaceProfile.addEventListener('click', () => closePopup(popupPlaceProfile));
-popupForm.addEventListener('submit', formSubmitHandler);
+popupForm.addEventListener('submit', profileFormSubmitHandler);
 profileAddButton.addEventListener('click', function() {
   popupCardName.value ='';
   popupCardLink.value ='';
@@ -126,12 +126,11 @@ profileAddButton.addEventListener('click', function() {
 });
 popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
 popupCrossPlaceCardImage.addEventListener('click', () => closePopup(popupPlaceCardImage));
-popupSubmitPlaceCard.addEventListener('click', function(evt) {
+popupFormPlaceCard.addEventListener('submit', function(evt) {
   evt.preventDefault();
   const element = getElement({name: popupCardName.value, link: popupCardLink.value });
   elementsList.prepend(element);
   closePopup(popupPlaceCard);
-  evt.preventDefault();
 });
 
 render();
