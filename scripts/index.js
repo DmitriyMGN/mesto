@@ -26,11 +26,15 @@ const initialCards = [
 ]; 
 
 const editButton = document.querySelector('.profile__edit');
+const popupCrossPlaceProfile = document.querySelector('.popup__cross');
+const profileAddButton = document.querySelector('.profile__add-button');
+
 const popupPlaceProfile = document.querySelector('.popup_place_profile');
+const popupPlaceCard = document.querySelector('.popup_place_card'); 
 const popupPlaceCardImage = document.querySelector('.popup_place_card-image');
 const elementsImage = document.querySelector('.elements__image');
 const popupForm = document.querySelector('.popup__form');
-const popupCrossPlaceProfile = document.querySelector('.popup__cross');
+
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
 const popupName = document.querySelector('.popup__input_place_name');
@@ -38,12 +42,9 @@ const popupActivity = document.querySelector('.popup__input_place_activity');
 const popupCardName = document.querySelector('.popup__input_place_card-name');
 const popupCardLink = document.querySelector('.popup__input_place_card-link');
 
-const profileAddButton = document.querySelector('.profile__add-button');
-const popupPlaceCard = document.querySelector('.popup_place_card'); 
 const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupCrossPlaceCardImage = popupPlaceCardImage.querySelector('.popup__cross');
 const popupSubmitPlaceCard = popupPlaceCard.querySelector('.popup__submit');
-
 const elementsList = document.querySelector('.elements__list');
 const template = document.querySelector('.template');
 
@@ -109,17 +110,15 @@ function handleOpenCardImage(evt) {
   popupCaption.textContent = elementsTitle.textContent;
 }
 
-
 editButton.addEventListener('click', function() {
   if (!popupPlaceProfile.classList.contains('popup_open')) {
     popupName.value = profileName.textContent;
     popupActivity.value = profileActivity.textContent;
-}
+  }
   openPopup(popupPlaceProfile);
 });
 popupCrossPlaceProfile.addEventListener('click', () => closePopup(popupPlaceProfile));
 popupForm.addEventListener('submit', formSubmitHandler);
-
 profileAddButton.addEventListener('click', function() {
   popupCardName.value ='';
   popupCardLink.value ='';
