@@ -1,0 +1,10 @@
+.popup__content_card-image {
+  width: auto;
+  border-radius: 0;
+}
+
+@media screen and (max-width:570px) {
+  .popup__content_card-image {
+    width: auto;
+  }
+}

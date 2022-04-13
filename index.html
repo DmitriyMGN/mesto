@@ -56,12 +56,19 @@
         <h2 class="popup__title">Новое место</h2>
         <button type="button" class="popup__cross"></button>
           <form action="#" name="popup" class="popup__form">
-            <input type="text" id="name" name="name" placeholder="Название" class="popup__input popup__input_place_card-name">
+            <input type="text" id="name" name="name" placeholder="Название" maxlength="40" class="popup__input popup__input_place_card-name">
             <input type="text" id="activity" name="activity" placeholder="Ссылка на картинку" class="popup__input popup__input_place_card-link">
             <button type="submit" class="popup__submit">Создать</button>
           </form>
       </div>
-  </div>
+    </div>
+      <div class="popup popup_place_card-image">
+        <div class="popup__content popup__content_card-image">
+          <button type="button" class="popup__cross"></button>
+          <img src="" alt="" class="popup__card-image">
+          <p class="popup__caption"></p>
+        </div>
+      </div>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
