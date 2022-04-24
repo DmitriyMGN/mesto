@@ -2,24 +2,24 @@ const showInputError = (form,input,inputError,spanError,errorMessage) => {
   const errorForm = document.querySelector(`${form}`);
   const inputElement = document.querySelector(`${input}`);
   const errorElement = errorForm.querySelector('.popup__error');
-  console.log(errorElement);
   inputElement.classList.add(`${inputError}`);
   errorElement.classList.add(`${spanError}`);
   errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (formElement, inputElement, inputError, spanError) => {
-  const errorFormElement = document.querySelector(`${formElement}`);
-  const errorElement = errorFormElement.querySelector(`${inputElement}-error`);
-  inputElement.classList.add(`${inputError}`);
-  errorElement.classList.add(`${spanError}`);
+const hideInputError = (form, input, inputError,spanError) => {
+  const errorForm = document.querySelector(`${form}`);
+  const inputElement = document.querySelector(`${input}`);
+  const errorElement = errorForm.querySelector('.popup__error');
+  inputElement.classList.remove(`${inputError}`);
+  errorElement.classList.remove(`${spanError}`);
+  console.log(`${spanError}`)
   errorElement.textContent = '';
 };
 
 const checkInputValidity = function (form,input,inputError,spanError) {
   const validateInput = document.querySelector(`${input}`);
   const errorMessage = validateInput.validationMessage;
-  console.log(validateInput);
   if(!validateInput.validity.valid) {
     console.log('Не валидно');
     showInputError(form,input,inputError,spanError,errorMessage);
@@ -29,8 +29,20 @@ const checkInputValidity = function (form,input,inputError,spanError) {
   }
 };
 
+const setEventListeners = (form, input) => {
+  const inputList = Array.from(document.querySelectorAll(`${input}`));
+  inputList.forEach((input1) => {
+    input1.addEventListener('input', function () {
+      checkInputValidity(form,input);
+      console.log(input);
+    });
+  });
+};
+
 const enableValidation = ({formSelector,inputSelector,inputErrorClass,errorClass}) => {
+  setEventListeners(formSelector,inputSelector);
   checkInputValidity(formSelector,inputSelector,inputErrorClass,errorClass);
+
 }
 
 enableValidation({
