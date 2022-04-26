@@ -1,0 +1,4 @@
+.popup__position-container {
+  position: relative;
+  display: flex;
+}
