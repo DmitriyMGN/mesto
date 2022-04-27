@@ -45,10 +45,7 @@ const popupCardLink = document.querySelector('.popup__input_place_card-link');
 
 const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupCrossPlaceCardImage = popupPlaceCardImage.querySelector('.popup__cross');
-<<<<<<< HEAD
-=======
 const popupSubmitPlaceCard = popupPlaceCard.querySelector('.popup__button');
->>>>>>> develop
 const elementsList = document.querySelector('.elements__list');
 const template = document.querySelector('.template');
 
