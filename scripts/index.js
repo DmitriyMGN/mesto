@@ -45,6 +45,10 @@ const popupCardLink = document.querySelector('.popup__input_place_card-link');
 
 const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupCrossPlaceCardImage = popupPlaceCardImage.querySelector('.popup__cross');
+<<<<<<< HEAD
+=======
+const popupSubmitPlaceCard = popupPlaceCard.querySelector('.popup__button');
+>>>>>>> develop
 const elementsList = document.querySelector('.elements__list');
 const template = document.querySelector('.template');
 
@@ -73,10 +77,23 @@ function getElement(item) {
 
 function openPopup(modalWindow) {
   modalWindow.classList.add('popup_open');
+  document.addEventListener('keydown', onEscClose);
+  modalWindow.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(modalWindow);
+    }
+  });
+  deleteErrors(object, modalWindow);
 }
 
 function closePopup(modalWindow) {
   modalWindow.classList.remove('popup_open');
+  modalWindow.removeEventListener('keydown', onEscClose);
+  modalWindow.removeEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(modalWindow);
+    }
+  });
 }
 
 function profileFormSubmitHandler(evt) {
@@ -108,6 +125,13 @@ function handleOpenCardImage(evt) {
   popupCardImage.src = elementsImage.src;
   popupCardImage.alt = elementsImage.alt;
   popupCaption.textContent = elementsTitle.textContent;
+}
+
+function onEscClose(evt) {
+  const openPopupWin = document.querySelector('.popup_open');
+  if (evt.key === 'Escape' && openPopupWin !== null) {
+    closePopup(openPopupWin);
+  }
 }
 
 editButton.addEventListener('click', function() {
