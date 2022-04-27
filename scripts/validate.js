@@ -73,6 +73,3 @@ const deleteErrors = function (object, modalWindow) {
  };
 
 enableValidation(object);
-
-
-
