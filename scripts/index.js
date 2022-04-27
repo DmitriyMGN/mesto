@@ -79,6 +79,7 @@ function openPopup(modalWindow) {
       closePopup(modalWindow);
     }
   });
+  deleteErrors(object, modalWindow);
 }
 
 function closePopup(modalWindow) {
@@ -89,7 +90,6 @@ function closePopup(modalWindow) {
       closePopup(modalWindow);
     }
   });
-  modalWindow.querySelectorAll('.popup__error').textContent = '';
 }
 
 function formSubmitHandler(evt) {

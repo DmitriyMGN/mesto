@@ -1,3 +1,12 @@
+const object = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 const showInputError = (inputErrorClass, errorClass, formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
   inputElement.classList.add(inputErrorClass);
@@ -55,15 +64,14 @@ const enableValidation = (object) => {
   });
 };
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
+const deleteErrors = function (object, modalWindow) {
+  const inputList = Array.from(modalWindow.querySelectorAll(object.inputSelector));
+  inputList.forEach((inputElement) => {
+    hideInputError(object.inputErrorClass, object.errorClass, modalWindow, inputElement);
+  });
+ };
 
+ enableValidation(object);
 
 
 
