@@ -130,9 +130,6 @@ function onEscClose(evt) {
   }
 }
 
-
-
-
 editButton.addEventListener('click', function() {
   if (!popupPlaceProfile.classList.contains('popup_open')) {
     popupName.value = profileName.textContent;
