@@ -142,8 +142,7 @@ popupForm.addEventListener('submit', profileFormSubmitHandler);
 profileAddButton.addEventListener('click', function() {
   popupCardName.value ='';
   popupCardLink.value ='';
-  popupSubmitPlaceCard.setAttribute('disabled','');
-  popupSubmitPlaceCard.classList.add('popup__button_disabled');
+  disableSubmitButton(popupSubmitPlaceCard, object.inactiveButtonClass);
   openPopup(popupPlaceCard);
 });
 popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));

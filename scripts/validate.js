@@ -35,10 +35,14 @@ const hasInvalidInput = function (inputList) {
   });
 };
 
+const disableSubmitButton = function (buttonElement,inactiveButtonClass) {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute('disabled','');
+};
+
 const toggleButtonState = function (inputList, buttonElement, inactiveButtonClass) {
   if(hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled','');
+    disableSubmitButton(buttonElement,inactiveButtonClass);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute('disabled'); 
