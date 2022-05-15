@@ -46,6 +46,7 @@ const popupPlaceCardImage = document.querySelector('.popup_place_card-image');
 const popupForm = document.querySelector('.popup__form');
 const popupFormPlaceCard = popupPlaceCard.querySelector('.popup__form');
 
+
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
 const popupName = document.querySelector('.popup__input_place_name');
@@ -55,7 +56,15 @@ const popupCardLink = document.querySelector('.popup__input_place_card-link');
 
 const popupCrossPlaceCard = popupPlaceCard.querySelector('.popup__cross');
 const popupCrossPlaceCardImage = popupPlaceCardImage.querySelector('.popup__cross');
+const popupCardImage = popupPlaceCardImage.querySelector('.popup__card-image');
+const popupCaption = popupPlaceCardImage.querySelector('.popup__caption');
+const popupCardButton = popupPlaceCard.querySelector('.popup__button');
 const elementsList = document.querySelector('.elements__list');
+
+const cardFormValidator = new FormValidator(object, popupFormPlaceCard);
+const profileFormValidator = new FormValidator(object, popupPlaceProfile);
+cardFormValidator.enableValidation();
+profileFormValidator.enableValidation();
 
 function openPopup(modalWindow) {
   modalWindow.classList.add('popup_open');
@@ -70,16 +79,18 @@ function closePopup(modalWindow) {
 }
 
 function onEscClose(evt) {
-  const openPopupWin = document.querySelector('.popup_open');
-  if (evt.key === 'Escape' && openPopupWin !== null) {
+  if (evt.key === 'Escape') {
+    const openPopupWin = document.querySelector('.popup_open');
     closePopup(openPopupWin);
   }
 }
 
 function onOverlayClickClose (evt) {
-  const openPopupWin = document.querySelector('.popup_open');
   if (evt.target.classList.contains('popup')) {
-    closePopup(openPopupWin);
+    const formList = Array.from(document.querySelectorAll('.popup'));
+    formList.forEach(function(form) {
+      closePopup(form);
+    });
   }
 }
 
@@ -94,13 +105,17 @@ function handleOpenCardImage(evt) {
   openPopup(popupPlaceCardImage);
   const element = evt.target.closest('.elements__item');
   const elementsImage = element.querySelector('.elements__image');
-  const popupCardImage = popupPlaceCardImage.querySelector('.popup__card-image');
   const elementsTitle = element.querySelector('.elements__title');
-  const popupCaption = popupPlaceCardImage.querySelector('.popup__caption');
 
   popupCardImage.src = elementsImage.src;
   popupCardImage.alt = elementsImage.alt;
   popupCaption.textContent = elementsTitle.textContent;
+}
+
+function createCard(item) {
+  const card = new Card(item, '.template', handleOpenCardImage);
+  const cardElement = card.generateCard(); 
+  return cardElement;
 }
 
 editButton.addEventListener('click', function() {
@@ -108,9 +123,7 @@ editButton.addEventListener('click', function() {
     popupName.value = profileName.textContent;
     popupActivity.value = profileActivity.textContent;
   }
-  const formValidator = new FormValidator(object, popupPlaceProfile);
-  formValidator.enableValidation();
-  formValidator.deleteErrors(object, popupPlaceProfile);
+  profileFormValidator.deleteErrors(object, popupPlaceProfile);
   openPopup(popupPlaceProfile);
 });
 
@@ -119,23 +132,18 @@ popupForm.addEventListener('submit', profileFormSubmitHandler);
 profileAddButton.addEventListener('click', function() {
   popupCardName.value ='';
   popupCardLink.value ='';
-  const formValidator = new FormValidator(object, popupPlaceCard);
-  formValidator.enableValidation();
-  formValidator.deleteErrors(object, popupPlaceCard);
+  cardFormValidator.deleteErrors(object, popupPlaceCard);
+  cardFormValidator.disableSubmitButton(popupCardButton, object.inactiveButtonClass);
   openPopup(popupPlaceCard);
 });
 popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
 popupCrossPlaceCardImage.addEventListener('click', () => closePopup(popupPlaceCardImage));
 popupFormPlaceCard.addEventListener('submit', function(evt) {
   evt.preventDefault();
-  const element = new Card({name: popupCardName.value, link: popupCardLink.value},'.template', handleOpenCardImage);
-  elementsList.prepend(element.generateCard());
+  elementsList.prepend(createCard({name: popupCardName.value, link: popupCardLink.value}));
   closePopup(popupPlaceCard);
 });
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template', handleOpenCardImage);
-  const cardElement = card.generateCard();
-
-  elementsList.append(cardElement);
+  elementsList.append(createCard(item));
 });
