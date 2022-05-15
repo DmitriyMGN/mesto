@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(item, templateElement, handleOpenCardImage) {
     this._name = item.name;
     this._link = item.link;
@@ -41,5 +41,4 @@ export class Card {
     const likeButtonActive = this._element.querySelector('.elements__like');
     likeButtonActive.classList.toggle('elements__like_active');
   }
- 
 }

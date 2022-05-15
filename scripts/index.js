@@ -1,5 +1,5 @@
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const initialCards = [
   {
@@ -126,7 +126,6 @@ profileAddButton.addEventListener('click', function() {
 });
 popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
 popupCrossPlaceCardImage.addEventListener('click', () => closePopup(popupPlaceCardImage));
-
 popupFormPlaceCard.addEventListener('submit', function(evt) {
   evt.preventDefault();
   const element = new Card({name: popupCardName.value, link: popupCardLink.value},'.template', handleOpenCardImage);
