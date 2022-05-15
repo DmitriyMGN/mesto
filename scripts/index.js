@@ -46,7 +46,6 @@ const popupPlaceCardImage = document.querySelector('.popup_place_card-image');
 const popupForm = document.querySelector('.popup__form');
 const popupFormPlaceCard = popupPlaceCard.querySelector('.popup__form');
 
-
 const profileName = document.querySelector('.profile__name');
 const profileActivity = document.querySelector('.profile__activity');
 const popupName = document.querySelector('.popup__input_place_name');
@@ -87,12 +86,9 @@ function onEscClose(evt) {
 
 function onOverlayClickClose (evt) {
   if (evt.target.classList.contains('popup')) {
-    const formList = Array.from(document.querySelectorAll('.popup'));
-    formList.forEach(function(form) {
-      closePopup(form);
-    });
+      closePopup(evt.target);
+    }
   }
-}
 
 function profileFormSubmitHandler(evt) {
   evt.preventDefault();
