@@ -1,5 +1,8 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import './index.css';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 
 const initialCards = [
   {
@@ -65,30 +68,34 @@ const profileFormValidator = new FormValidator(object, popupPlaceProfile);
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-function openPopup(modalWindow) {
-  modalWindow.classList.add('popup_open');
-  document.addEventListener('keydown', onEscClose);
-  modalWindow.addEventListener('click', onOverlayClickClose);
-}
+const popupProfile = new Popup('.popup_place_profile');
+const popupAddCard = new Popup('.popup_place_card');
+const popupFullScreenCard = new Popup('.popup_place_card-image');
 
-function closePopup(modalWindow) {
-  modalWindow.classList.remove('popup_open');
-  document.removeEventListener('keydown', onEscClose);
-  modalWindow.removeEventListener('click', onOverlayClickClose);
-}
+// function openPopup(modalWindow) {
+//   modalWindow.classList.add('popup_open');
+//   document.addEventListener('keydown', onEscClose);
+//   modalWindow.addEventListener('click', onOverlayClickClose);
+// }
 
-function onEscClose(evt) {
-  if (evt.key === 'Escape') {
-    const openPopupWin = document.querySelector('.popup_open');
-    closePopup(openPopupWin);
-  }
-}
+// function closePopup(modalWindow) {
+//   modalWindow.classList.remove('popup_open');
+//   document.removeEventListener('keydown', onEscClose);
+//   modalWindow.removeEventListener('click', onOverlayClickClose);
+// }
 
-function onOverlayClickClose (evt) {
-  if (evt.target.classList.contains('popup')) {
-      closePopup(evt.target);
-    }
-  }
+// function onEscClose(evt) {
+//   if (evt.key === 'Escape') {
+//     const openPopupWin = document.querySelector('.popup_open');
+//     closePopup(openPopupWin);
+//   }
+// }
+
+// function onOverlayClickClose (evt) {
+//   if (evt.target.classList.contains('popup')) {
+//       closePopup(evt.target);
+//     }
+//   }
 
 function profileFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -98,7 +105,7 @@ function profileFormSubmitHandler(evt) {
 }
 
 function handleOpenCardImage(evt) {
-  openPopup(popupPlaceCardImage);
+  popupFullScreenCard.open();
   const element = evt.target.closest('.elements__item');
   const elementsImage = element.querySelector('.elements__image');
   const elementsTitle = element.querySelector('.elements__title');
@@ -120,26 +127,33 @@ editButton.addEventListener('click', function() {
     popupActivity.value = profileActivity.textContent;
   }
   profileFormValidator.deleteErrors(object, popupPlaceProfile);
-  openPopup(popupPlaceProfile);
+  popupProfile.open();
 });
 
-popupCrossPlaceProfile.addEventListener('click', () => closePopup(popupPlaceProfile));
+// popupCrossPlaceProfile.addEventListener('click', () => closePopup(popupPlaceProfile));
 popupForm.addEventListener('submit', profileFormSubmitHandler);
 profileAddButton.addEventListener('click', function() {
   popupCardName.value ='';
   popupCardLink.value ='';
   cardFormValidator.deleteErrors(object, popupPlaceCard);
   cardFormValidator.disableSubmitButton(popupCardButton, object.inactiveButtonClass);
-  openPopup(popupPlaceCard);
+  popupAddCard.open();
 });
-popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
-popupCrossPlaceCardImage.addEventListener('click', () => closePopup(popupPlaceCardImage));
+// popupCrossPlaceCard.addEventListener('click', () => closePopup(popupPlaceCard));
+// popupCrossPlaceCardImage.addEventListener('click', () => closePopup(popupPlaceCardImage));
 popupFormPlaceCard.addEventListener('submit', function(evt) {
   evt.preventDefault();
-  elementsList.prepend(createCard({name: popupCardName.value, link: popupCardLink.value}));
+  cardList.addItem(createCard({name: popupCardName.value, link: popupCardLink.value}));
   closePopup(popupPlaceCard);
 });
 
-initialCards.forEach((item) => {
-  elementsList.append(createCard(item));
-});
+const cardList = new Section({ 
+  items: initialCards, 
+  renderer: (item) => {
+      const card = createCard(item);
+      cardList.addItem(card);
+   }}, 
+ '.elements__list');
+
+ cardList.renderItems();
+

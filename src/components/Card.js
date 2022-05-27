@@ -37,6 +37,7 @@ export default class Card {
     elementsImage.addEventListener('click', this._handleOpenCardImage);
   }
 
+  
   _handleLikeElements() {
     const likeButtonActive = this._element.querySelector('.elements__like');
     likeButtonActive.classList.toggle('elements__like_active');
