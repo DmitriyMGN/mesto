@@ -2,7 +2,6 @@ import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
@@ -49,13 +48,9 @@ const popupPlaceCard = document.querySelector('.popup_place_card');
 const popupFormPlaceCard = popupPlaceCard.querySelector('.popup__form');
 const popupName = document.querySelector('.popup__input_place_name');
 const popupActivity = document.querySelector('.popup__input_place_activity');
-const popupCardButton = popupPlaceCard.querySelector('.popup__button');
 
 const cardFormValidator = new FormValidator(object, popupFormPlaceCard);
 const profileFormValidator = new FormValidator(object, popupPlaceProfile);
-const popupProfile = new Popup('.popup_place_profile');
-const popupAddCard = new Popup('.popup_place_card');
-const popupFullScreenCard = new Popup('.popup_place_card-image');
 const popupWithImage = new PopupWithImage('.popup_place_card-image');
 const userInfo = new UserInfo('.profile__name', '.profile__activity');
 
@@ -89,18 +84,18 @@ editButton.addEventListener('click', function() {
     popupActivity.value = data.activity;
 
     profileFormValidator.deleteErrors();
-    popupProfile.open();
+    popupWithProfileForm.open();
 });
 
 profileAddButton.addEventListener('click', function() {
   cardFormValidator.deleteErrors();
-  cardFormValidator.disableSubmitButton(popupCardButton);
-  popupAddCard.open();
+  cardFormValidator.disableSubmitButton();
+  popupWithCardForm.open();
 });
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
-popupFullScreenCard.setEventListeners();
+popupWithImage.setEventListeners();
 popupWithProfileForm.setEventListeners();
 popupWithCardForm.setEventListeners();
 cardList.renderItems();
