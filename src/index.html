@@ -12,6 +12,7 @@
     <img src="<%=require('../src/images/header__logo.svg')%>" alt="Картинка логотипа Место" class="header__logo">
   </header>
   <main>
+    
   <section class="profile">
       <img src="<%=require('../src/images/profile__avatar.png')%>" alt="Аватар профиля" class="profile__avatar">
       <div class="profile__info">
@@ -50,11 +51,11 @@
             minlength="2"
             maxlength="40"
             type="text" 
-            id="name" 
-            name="name" 
+            id="person" 
+            name="person" 
             placeholder="Имя" 
             class="popup__input popup__input_place_name">
-            <span class="popup__error name-error"></span>
+            <span class="popup__error person-error"></span>
           </div>
           <div class="popup__position-container">
             <input
@@ -62,11 +63,11 @@
             minlength="2"
             maxlength="200" 
             type="text" 
-            id="activity" 
-            name="activity" 
+            id="job" 
+            name="job" 
             placeholder="Профессиональная деятельность" 
             class="popup__input popup__input_place_activity">
-            <span class="popup__error activity-error"></span>
+            <span class="popup__error job-error"></span>
           </div>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
@@ -83,11 +84,11 @@
               minlength="2"
               maxlength="30"  
               type="text" 
-              id="place" 
-              name="place" 
+              id="name" 
+              name="name" 
               placeholder="Название" 
               class="popup__input popup__input_place_card-name">
-              <span class="popup__error place-error"></span>
+              <span class="popup__error name-error"></span>
             </div>
             
             <div class="popup__position-container">

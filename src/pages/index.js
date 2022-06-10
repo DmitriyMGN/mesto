@@ -5,30 +5,31 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js'
 
 const initialCards = [
   {
-    place: 'Архыз',
+    name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    place: 'Челябинская область',
+    name: 'Челябинская область',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    place: 'Иваново',
+    name: 'Иваново',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    place: 'Камчатка',
+    name: 'Камчатка',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    place: 'Холмогорский район',
+    name: 'Холмогорский район',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    place: 'Байкал',
+    name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
@@ -92,6 +93,17 @@ profileAddButton.addEventListener('click', function() {
   cardFormValidator.disableSubmitButton();
   popupWithCardForm.open();
 });
+
+const api = new Api('https://nomoreparties.co/v1/cohort-43');
+
+api.getUserInfo()
+  .then(resault => {
+    console.log(resault)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();

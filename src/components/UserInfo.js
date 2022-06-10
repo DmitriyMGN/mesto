@@ -13,7 +13,7 @@ export default class UserInfo {
   }
 
   setUserInfo(item) {
-      this._profileNameElement.textContent = item.name,
-      this._profileActivityElement.textContent = item.activity;
+      this._profileNameElement.textContent = item.person,
+      this._profileActivityElement.textContent = item.job;
   }
 }

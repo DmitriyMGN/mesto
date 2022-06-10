@@ -11,7 +11,7 @@ export default class PopupWithImage extends Popup {
     const popupTitle = this._popupElement.querySelector('.popup__caption');
  
     popupImage.src = item.link;
-    popupTitle.alt = item.place;
-    popupTitle.textContent = item.place;
+    popupTitle.alt = item.name;
+    popupTitle.textContent = item.name;
   }
 } 

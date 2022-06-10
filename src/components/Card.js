@@ -1,6 +1,6 @@
 export default class Card {
   constructor(item, templateElement, handleOpenCardImage) {
-    this._place = item.place;
+    this._name = item.name;
     this._link = item.link;
     this._templateElement = templateElement;
     this._handleOpenCardImage = handleOpenCardImage;
@@ -21,8 +21,8 @@ export default class Card {
     this._setEventListeners();
     
     this._element.querySelector('.elements__image').src= this._link;
-    this._element.querySelector('.elements__image').alt= this._place;
-    this._element.querySelector('.elements__title').textContent = this._place;
+    this._element.querySelector('.elements__image').alt= this._name;
+    this._element.querySelector('.elements__title').textContent = this._name;
    
     return this._element;
   }
