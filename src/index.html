@@ -14,7 +14,7 @@
   <main>
     
   <section class="profile">
-      <img src="<%=require('../src/images/profile__avatar.png')%>" alt="Аватар профиля" class="profile__avatar">
+      <img  alt="Аватар профиля" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit"></button>
@@ -36,7 +36,11 @@
       <button type="button" class="elements__remove"></button>
       <div class="elements__info">
         <h3 class="elements__title"></h3>
-        <button type="button" class="elements__like"></button>
+          <div>
+            <button type="button" class="elements__like"></button>
+            <p class="elements__like-count">3</p>
+          </div>
+
       </div>
     </li>
   </template>
@@ -110,6 +114,34 @@
           <button type="button" class="popup__cross"></button>
           <img class="popup__card-image">
           <p class="popup__caption"></p>
+        </div>
+      </div>
+      <div class="popup popup_place_card-delete">
+        <div class="popup__content">
+          <form novalidate action="#" name="popup" class="popup__form">
+            <h2 class="popup__title popup__title_place_card-delete">Вы уверены?</h2>
+            <button type="button" class="popup__cross"></button>
+            <button type="submit" class="popup__button">Да</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_place_avatar">
+        <div class="popup__content">
+          <form novalidate action="#" name="popup" class="popup__form">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <div class="popup__position-container">
+              <input 
+              required
+              type="url" 
+              id="avatar" 
+              name="avatar" 
+              placeholder="Ссылка на картинку" 
+              class="popup__input popup__input_place_card-link">
+              <span class="popup__error avatar-error"></span>
+            </div>
+            <button type="button" class="popup__cross"></button>
+            <button type="submit" class="popup__button">Сохранить</button>
+          </form>
         </div>
       </div>
 </body>

@@ -2,6 +2,7 @@ export default class UserInfo {
   constructor(profileNameSelector, profileActivitySelector) {
     this._profileNameElement = document.querySelector(profileNameSelector);
     this._profileActivityElement = document.querySelector(profileActivitySelector);
+    this._avatarElement = document.querySelector('.profile__avatar')
   }
 
   getUserInfo() {
@@ -15,5 +16,9 @@ export default class UserInfo {
   setUserInfo(item) {
       this._profileNameElement.textContent = item.person,
       this._profileActivityElement.textContent = item.job;
+  }
+
+  setUserAvatar(url) {
+    this._avatarElement.src = url
   }
 }

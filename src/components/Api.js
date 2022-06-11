@@ -18,8 +18,20 @@ export default class Api {
   
         return Promise.reject(`Ошибка: ${res.status}`);
       });
-  
   } 
+
+  getInitialCards() {
+    return fetch(`${this._url}/cards`, {
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+  
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
 
 }
 

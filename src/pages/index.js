@@ -46,12 +46,14 @@ const editButton = document.querySelector('.profile__edit');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupPlaceProfile = document.querySelector('.popup_place_profile');
 const popupPlaceCard = document.querySelector('.popup_place_card'); 
+const popupPlaceAvatar = document.querySelector('.popup_place_avatar');
 const popupFormPlaceCard = popupPlaceCard.querySelector('.popup__form');
 const popupName = document.querySelector('.popup__input_place_name');
 const popupActivity = document.querySelector('.popup__input_place_activity');
 
 const cardFormValidator = new FormValidator(object, popupFormPlaceCard);
 const profileFormValidator = new FormValidator(object, popupPlaceProfile);
+const avatarFormValidator = new FormValidator(object, popupPlaceAvatar);
 const popupWithImage = new PopupWithImage('.popup_place_card-image');
 const userInfo = new UserInfo('.profile__name', '.profile__activity');
 
@@ -97,16 +99,26 @@ profileAddButton.addEventListener('click', function() {
 const api = new Api('https://nomoreparties.co/v1/cohort-43');
 
 api.getUserInfo()
-  .then(resault => {
-    console.log(resault)
+  .then(data => {
+    userInfo.setUserInfo({person: data.name, job: data.about});
+    userInfo.setUserAvatar(data.avatar)
   })
   .catch(err => {
     console.log(err)
   })
 
+  api.getInitialCards() 
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 popupWithImage.setEventListeners();
 popupWithProfileForm.setEventListeners();
 popupWithCardForm.setEventListeners();
