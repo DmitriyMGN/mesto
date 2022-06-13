@@ -25,6 +25,14 @@ export default class PopupWithForm extends Popup {
     }); 
   }
 
+  deleteCard(api) {
+    super.setEventListeners();
+    this._popupForm.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      api
+    }); 
+  }
+
   close() {
     super.close();
     this._popupForm.reset();

@@ -33,6 +33,30 @@ export default class Api {
       });
   }
 
+  setUserInfo(item) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: item.person,
+        about: item.job
+      })
+    })
+  }
+
+  setNewCard(item) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: item.name,
+        link: item.link
+      })
+    });
+  }
+
+
+
 }
 
 
