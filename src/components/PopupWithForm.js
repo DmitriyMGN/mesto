@@ -7,7 +7,6 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupElement.querySelector('.popup__form');
     this._buttonElement = this._popupForm.querySelector('.popup__button');
     this._inputList = Array.from(this._popupElement.querySelectorAll('.popup__input'));
-
   }
 
   renderLoading(isLoading, intialMessage, updateMessage) {

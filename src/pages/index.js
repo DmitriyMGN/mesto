@@ -53,11 +53,12 @@ const cardList = new Section(
       handleRemoveCardClick,
       handleLikeClick
   );
-    
+
     const cardElement = card.generateCard();
     if(card.isLiked()){
       card.addLikeElements()
     }
+    
     return cardElement;
   }
 
