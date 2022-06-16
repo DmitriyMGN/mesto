@@ -13,12 +13,12 @@ export default class UserInfo {
     return profileData;
   }
 
-  setUserInfo(item) {
-      this._profileNameElement.textContent = item.person,
-      this._profileActivityElement.textContent = item.job;
+  setUserInfo(data) {
+      this._profileNameElement.textContent = data.person;
+      this._profileActivityElement.textContent = data.job;
   }
 
   setUserAvatar(url) {
-    this._avatarElement.src = url
+    this._avatarElement.style.backgroundImage = `url(${url})`;
   }
 }

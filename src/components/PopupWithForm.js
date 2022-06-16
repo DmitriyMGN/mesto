@@ -19,17 +19,9 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupForm.addEventListener('submit', (evt) => {
-      evt.preventDefault();
+    this._popupForm.addEventListener('submit', (e) => {
+      e.preventDefault()
       this._submitAddCard(this._getInputValues());
-    }); 
-  }
-
-  deleteCard(api) {
-    super.setEventListeners();
-    this._popupForm.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      api
     }); 
   }
 
