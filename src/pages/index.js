@@ -35,10 +35,7 @@ const userInfo = new UserInfo('.profile__name', '.profile__activity');
 
 const api = new Api('https://nomoreparties.co/v1/cohort-43');
 
-const popupDeleteCard = new PopupWithConfirmation(
-  '.popup_place_card-delete')
-
-
+const popupDeleteCard = new PopupWithConfirmation('.popup_place_card-delete')
 
 const cardList = new Section(
   function renderer(item) {
@@ -95,38 +92,41 @@ const cardList = new Section(
    
   }
 
-
 const popupWithCardForm = new PopupWithForm('.popup_place_card', (item) => {
+  popupWithCardForm.renderLoading(true, 'Создать', 'Cохранение...')
   api.setNewCard(item)
     .then(data => {
       return cardList.addItem(createCard(data));
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      popupWithCardForm.renderLoading(false, 'Создать', 'Cохранение...')
+    })
   popupWithCardForm.close();
 });
 
 const popupWithProfileForm = new PopupWithForm('.popup_place_profile', (item) => {
+  popupWithProfileForm.renderLoading(true, 'Сохранить', 'Cохранение...')
   api.setUserInfo(item)
-    .then(res => {
-      if (res.ok) {
+    .then(() => {
         return userInfo.setUserInfo(item);
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
     })
-    .catch(err => {
-      console.log(err)
-    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      popupWithProfileForm.renderLoading(false, 'Сохранить', 'Cохранение...')})
+    
   popupWithProfileForm.close();
 });
 
 const popupWithAvatar = new PopupWithForm('.popup_place_avatar', (item) => {
+  popupWithAvatar.renderLoading(true, 'Сохранить', 'Cохранение...')
   api.updateAvatar(item.avatar)
     .then(data => {
-      console.log(data)
       return userInfo.setUserAvatar(data.avatar)
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      popupWithAvatar.renderLoading(false, 'Сохранить', 'Cохранение...')})
     popupWithAvatar.close()
 })
 
@@ -164,7 +164,6 @@ api.getUserInfo()
 
 api.getInitialCards()
   .then(data => {
-    console.log(data)
     cardList.renderItems(data);
   })
   .catch(err => {
