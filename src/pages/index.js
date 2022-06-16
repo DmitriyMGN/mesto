@@ -8,24 +8,20 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js'
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js'
 
-const object = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+import {
+  object,
+  editButton,
+  profileAddButton,
+  profileAvatar,
+  popupPlaceProfile,
+  popupPlaceCard,
+  popupPlaceAvatar,
+  popupFormPlaceCard,
+  popupName,
+  popupActivity
+} from '../utils/constants.js';
 
-const editButton = document.querySelector('.profile__edit');
-const profileAddButton = document.querySelector('.profile__add-button');
-const profileAvatar = document.querySelector('.profile__avatar');
-const popupPlaceProfile = document.querySelector('.popup_place_profile');
-const popupPlaceCard = document.querySelector('.popup_place_card');
-const popupPlaceAvatar = document.querySelector('.popup_place_avatar');
-const popupFormPlaceCard = popupPlaceCard.querySelector('.popup__form');
-const popupName = document.querySelector('.popup__input_place_name');
-const popupActivity = document.querySelector('.popup__input_place_activity');
-
+let userId = null;
 
 const cardFormValidator = new FormValidator(object, popupFormPlaceCard);
 const profileFormValidator = new FormValidator(object, popupPlaceProfile);
@@ -49,7 +45,7 @@ const cardList = new Section(
       item, 
       '.template', 
       () => popupWithImage.open(item), 
-      '03cdb19cf25840cb7b559c84',
+      userId,
       handleRemoveCardClick,
       handleLikeClick
   );
@@ -97,41 +93,42 @@ const popupWithCardForm = new PopupWithForm('.popup_place_card', (item) => {
   popupWithCardForm.renderLoading(true, 'Создать', 'Cохранение...')
   api.setNewCard(item)
     .then(data => {
+      popupWithCardForm.close();
       return cardList.addItem(createCard(data));
     })
     .catch(err => console.log(err))
     .finally(() => {
       popupWithCardForm.renderLoading(false, 'Создать', 'Cохранение...')
     })
-  popupWithCardForm.close();
 });
 
 const popupWithProfileForm = new PopupWithForm('.popup_place_profile', (item) => {
   popupWithProfileForm.renderLoading(true, 'Сохранить', 'Cохранение...')
   api.setUserInfo(item)
     .then(() => {
+        popupWithProfileForm.close();
         return userInfo.setUserInfo(item);
     })
     .catch(err => console.log(err))
     .finally(() => {
       popupWithProfileForm.renderLoading(false, 'Сохранить', 'Cохранение...')})
-    
-  popupWithProfileForm.close();
 });
 
 const popupWithAvatar = new PopupWithForm('.popup_place_avatar', (item) => {
   popupWithAvatar.renderLoading(true, 'Сохранить', 'Cохранение...')
   api.updateAvatar(item.avatar)
     .then(data => {
+      popupWithAvatar.close()
       return userInfo.setUserAvatar(data.avatar)
     })
     .catch(err => console.log(err))
     .finally(() => {
       popupWithAvatar.renderLoading(false, 'Сохранить', 'Cохранение...')})
-    popupWithAvatar.close()
 })
 
 profileAvatar.addEventListener('click', function () {
+  avatarFormValidator.deleteErrors();
+  avatarFormValidator.disableSubmitButton();
   popupWithAvatar.open()
   }
 )
@@ -151,25 +148,19 @@ profileAddButton.addEventListener('click', function () {
   popupWithCardForm.open();
 });
 
-api.getUserInfo()
-  .then(data => {
-    userInfo.setUserInfo({
-      person: data.name,
-      job: data.about
-    });
-    userInfo.setUserAvatar(data.avatar)
-  })
-  .catch(err => {
-    console.log(err)
-  })
 
-api.getInitialCards()
-  .then(data => {
-    cardList.renderItems(data);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({
+      person: userData.name,
+      job: userData.about
+    });
+    userId = userData._id
+    userInfo.setUserAvatar(userData.avatar)
+
+    cardList.renderItems(cards);
   })
-  .catch(err => {
-    console.log(err)
-  })
+  .catch(err => {console.log(err)});
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
